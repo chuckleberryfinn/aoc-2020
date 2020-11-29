@@ -11,8 +11,8 @@ before_install:
   - rustup component add rustfmt
   - rustup component add clippy
 script:
-  - cargo fmt --verbose
-  - cargo clippy --verbose
-  - cargo build --verbose
+  - cargo fmt -- --check --verbose
+  - cargo clippy -- -D warnings --verbose
+  - cargo build --release --verbose
   - cargo test --verbose
 cache: cargo
