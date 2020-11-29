@@ -10,3 +10,14 @@ pub fn input(name: &str) -> io::Result<String> {
     File::open(Path::new("input").join(name))?.read_to_string(&mut s)?;
     Ok(s)
 }
+
+
+#[cfg(test)]
+mod tests {
+    use super::input;
+
+    #[test]
+    fn test_input() {
+        assert!(input("tests.txt").unwrap() == "test");
+    }
+}
