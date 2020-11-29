@@ -11,7 +11,6 @@ pub fn input(name: &str) -> io::Result<String> {
     Ok(s)
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::input;
