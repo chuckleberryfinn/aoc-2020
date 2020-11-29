@@ -15,3 +15,4 @@ script:
   - cargo clippy --verbose
   - cargo build --verbose
   - cargo test --verbose
+cache: cargo
