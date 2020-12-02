@@ -10,12 +10,12 @@ fn run() -> usize {
     input("2.txt")
         .unwrap()
         .lines()
-        .map(|s| parse(s))
+        .map(|s| parse_line(s))
         .filter(|r| valid_password(*r))
         .count()
 }
 
-fn parse(p: &str) -> (usize, usize, char, &str) {
+fn parse_line(p: &str) -> (usize, usize, char, &str) {
     let x: Vec<&str> = p.split(|c| c == '-' || c == ' ' || c == ':').collect();
     (
         x[0].parse().unwrap(),
