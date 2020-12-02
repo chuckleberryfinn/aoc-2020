@@ -10,7 +10,6 @@ fn run() -> usize {
     input("2.txt")
         .unwrap()
         .lines()
-        .map(|s| s.to_string())
         .map(|p| valid_password(&p))
         .filter(|r| *r)
         .count()
