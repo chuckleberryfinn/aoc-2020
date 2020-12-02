@@ -7,14 +7,10 @@ fn main() -> Result<()> {
 }
 
 fn run() -> usize {
-    let passwords: Vec<String> = input("2.txt")
+    input("2.txt")
         .unwrap()
         .lines()
         .map(|s| s.to_string())
-        .collect();
-
-    passwords
-        .iter()
         .map(|p| valid_password(&p))
         .filter(|r| *r)
         .count()
