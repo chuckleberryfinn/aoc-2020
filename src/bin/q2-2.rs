@@ -22,14 +22,15 @@ fn run() -> usize {
 
 fn valid_password(p: &str) -> bool {
     let x: Vec<&str> = p.split(|c| c == '-' || c == ' ' || c == ':').collect();
-    let (min, max, letter, p): (usize, usize, char, &str) = (
+    let (min, max, letter, password): (usize, usize, char, &str) = (
         x[0].parse().unwrap(),
         x[1].parse().unwrap(),
         x[2].chars().next().unwrap(),
         x[4],
     );
 
-    (p.chars().nth(min - 1).unwrap() == letter) ^ (p.chars().nth(max - 1).unwrap() == letter)
+    let chars: Vec<char> = password.chars().collect();
+    (chars[min - 1] == letter) ^ (chars[max - 1] == letter)
 }
 
 #[cfg(test)]
