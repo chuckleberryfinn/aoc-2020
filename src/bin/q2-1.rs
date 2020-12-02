@@ -22,8 +22,8 @@ fn run() -> usize {
 
 fn valid_password(p: &str) -> bool {
     let x: Vec<&str> = p.split(|c| c == '-' || c == ' ' || c == ':').collect();
-    let (min, max, letter, password): (usize, usize, &str, &str) =
-        (x[0].parse().unwrap(), x[1].parse().unwrap(), x[2], x[4]);
+    let (min, max, letter, password): (usize, usize, char, &str) =
+        (x[0].parse().unwrap(), x[1].parse().unwrap(), x[2].chars().next().unwrap(), x[4]);
 
     let count = password.matches(letter).count();
     min <= count && count <= max
