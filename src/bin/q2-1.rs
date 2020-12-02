@@ -6,26 +6,26 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn run() -> i64 {
+fn run() -> usize {
     let passwords: Vec<String> = input("2.txt")
         .unwrap()
         .lines()
         .map(|s| s.to_string())
         .collect();
 
-    let mut valid = 0;
-    for p in passwords {
-        let x: Vec<&str> = p.split(|c| c == '-' || c == ' ' || c == ':').collect();
-        let (min, max, letter, password): (usize, usize, &str, &str) =
-            (x[0].parse().unwrap(), x[1].parse().unwrap(), x[2], x[4]);
-        let count = password.matches(letter).count();
+    passwords
+        .iter()
+        .map(|p| valid_password(&p))
+        .filter(|r| *r)
+        .count()
+}
 
-        if min <= count && count <= max {
-            valid += 1;
-        }
-    }
-
-    valid
+fn valid_password(p: &str) -> bool {
+    let x: Vec<&str> = p.split(|c| c == '-' || c == ' ' || c == ':').collect();
+    let (min, max, letter, password): (usize, usize, &str, &str) =
+        (x[0].parse().unwrap(), x[1].parse().unwrap(), x[2], x[4]);
+    let count = password.matches(letter).count();
+    min <= count && count <= max
 }
 
 #[cfg(test)]
