@@ -10,20 +10,22 @@ fn run() -> usize {
     input("2.txt")
         .unwrap()
         .lines()
-        .map(|p| valid_password(&p))
-        .filter(|r| *r)
+        .map(|s| parse(s))
+        .filter(|r| valid_password(*r))
         .count()
 }
 
-fn valid_password(p: &str) -> bool {
+fn parse(p: &str) -> (usize, usize, char, &str) {
     let x: Vec<&str> = p.split(|c| c == '-' || c == ' ' || c == ':').collect();
-    let (min, max, letter, password): (usize, usize, char, &str) = (
+    (
         x[0].parse().unwrap(),
         x[1].parse().unwrap(),
         x[2].chars().next().unwrap(),
         x[4],
-    );
+    )
+}
 
+fn valid_password((min, max, letter, password): (usize, usize, char, &str)) -> bool {
     let chars: Vec<char> = password.chars().collect();
     (chars[min - 1] == letter) ^ (chars[max - 1] == letter)
 }
