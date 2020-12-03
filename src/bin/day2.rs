@@ -7,20 +7,19 @@ fn main() -> Result<()> {
 }
 
 fn part1() -> usize {
-    input("2.txt")
-        .unwrap()
-        .lines()
-        .map(|s| parse_line(s))
-        .filter(|p| valid_password_1(*p))
-        .count()
+    count_valid_passwords(valid_1)
 }
 
 fn part2() -> usize {
+    count_valid_passwords(valid_2)
+}
+
+fn count_valid_passwords(valid: fn((usize, usize, char, &str)) -> bool) -> usize {
     input("2.txt")
         .unwrap()
         .lines()
         .map(|s| parse_line(s))
-        .filter(|p| valid_password_2(*p))
+        .filter(|p| valid(*p))
         .count()
 }
 
@@ -34,12 +33,12 @@ fn parse_line(p: &str) -> (usize, usize, char, &str) {
     )
 }
 
-fn valid_password_1((min, max, letter, password): (usize, usize, char, &str)) -> bool {
+fn valid_1((min, max, letter, password): (usize, usize, char, &str)) -> bool {
     let count = password.matches(letter).count();
     (min..=max).contains(&count)
 }
 
-fn valid_password_2((min, max, letter, password): (usize, usize, char, &str)) -> bool {
+fn valid_2((min, max, letter, password): (usize, usize, char, &str)) -> bool {
     let chars: Vec<char> = password.chars().collect();
     (chars[min - 1] == letter) ^ (chars[max - 1] == letter)
 }
