@@ -7,26 +7,23 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn part1() -> i64 {
-    let expenses: HashSet<i64> = input("1.txt")
+fn get_hashset() -> HashSet<i64> {
+    input("1.txt")
         .unwrap()
         .lines()
         .map(|e| e.parse().unwrap())
-        .collect();
+        .collect()
+}
 
+fn part1() -> i64 {
+    let expenses = get_hashset();
     let complements: HashSet<i64> = expenses.iter().map(|e| complement(*e)).collect();
-
     expenses.intersection(&complements).product()
 }
 
 fn part2() -> i64 {
-    let expenses: Vec<i64> = input("1.txt")
-        .unwrap()
-        .lines()
-        .map(|e| e.parse().unwrap())
-        .collect();
-
-    let expenses_hash: HashSet<i64> = expenses.iter().copied().collect();
+    let expenses_hash = get_hashset();
+    let expenses: Vec<i64> = expenses_hash.iter().copied().collect();
     let mut solution = -1;
 
     for i in 0..expenses.len() {
