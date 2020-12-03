@@ -2,14 +2,12 @@ use aoc::*;
 use std::collections::HashSet;
 
 fn main() -> Result<()> {
-    let result = part_1();
-    println!("Day 1 part 1 result is {}", result);
-    let result = part_2();
-    println!("Day 1 part 2 result is {}", result);
+    println!("Day 1 part 1 result is {}", part1());
+    println!("Day 1 part 2 result is {}", part2());
     Ok(())
 }
 
-fn part_1() -> i64 {
+fn part1() -> i64 {
     let expenses: HashSet<i64> = input("1.txt")
         .unwrap()
         .lines()
@@ -21,7 +19,7 @@ fn part_1() -> i64 {
     expenses.intersection(&complements).product()
 }
 
-fn part_2() -> i64 {
+fn part2() -> i64 {
     let expenses: Vec<i64> = input("1.txt")
         .unwrap()
         .lines()
@@ -53,12 +51,12 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_part_1() {
-        assert!(part_1() == 878724);
+    fn test_part1() {
+        assert!(part1() == 878724);
     }
 
     #[test]
-    fn test_part_2() {
-        assert!(part_2() == 201251610);
+    fn test_part2() {
+        assert!(part2() == 201251610);
     }
 }
