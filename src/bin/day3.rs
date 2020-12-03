@@ -18,18 +18,15 @@ fn get_grid() -> Vec<String> {
 }
 
 fn part1(grid: &[String]) -> usize {
-    slope(3, 1, &grid)
+    slope((3, 1), &grid)
 }
 
 fn part2(grid: &[String]) -> usize {
-    slope(1, 1, &grid)
-        * slope(3, 1, &grid)
-        * slope(5, 1, &grid)
-        * slope(7, 1, &grid)
-        * slope(1, 2, &grid)
+    let directions = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];
+    directions.iter().map(|d| slope(*d, &grid)).product()
 }
 
-fn slope(x: usize, y: usize, grid: &[String]) -> usize {
+fn slope((x, y): (usize, usize), grid: &[String]) -> usize {
     grid.iter()
         .step_by(y)
         .enumerate()
