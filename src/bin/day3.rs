@@ -2,10 +2,8 @@ use aoc::*;
 
 fn main() -> Result<()> {
     let grid: Vec<String> = get_grid();
-    let result = part1(&grid);
-    println!("Day 3 part 1 result is {}", result);
-    let result = part2(&grid);
-    println!("Day 3 part 2 result is {}", result);
+    println!("Day 3 part 1 result is {}", part1(&grid));
+    println!("Day 3 part 2 result is {}", part2(&grid));
     Ok(())
 }
 
@@ -22,8 +20,10 @@ fn part1(grid: &[String]) -> usize {
 }
 
 fn part2(grid: &[String]) -> usize {
-    let directions = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];
-    directions.iter().map(|d| slope(*d, &grid)).product()
+    [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
+        .iter()
+        .map(|d| slope(*d, &grid))
+        .product()
 }
 
 fn slope((x, y): (usize, usize), grid: &[String]) -> usize {
