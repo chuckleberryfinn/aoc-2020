@@ -31,10 +31,10 @@ fn part2(grid: &[String]) -> usize {
 
 fn slope(x: usize, y: usize, grid: &[String]) -> usize {
     grid.iter()
-        .skip(y)
         .step_by(y)
         .enumerate()
-        .filter(|(i, r)| r.chars().nth(((i + 1) * x) % r.len()).unwrap() == '#')
+        .skip(1)
+        .filter(|(i, r)| r.chars().nth((i * x) % r.len()).unwrap() == '#')
         .count()
 }
 
