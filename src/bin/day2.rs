@@ -1,14 +1,12 @@
 use aoc::*;
 
 fn main() -> Result<()> {
-    let result = part_1();
-    println!("Day 2 part 1 result is {}", result);
-    let result = part_2();
-    println!("Day 2 part 2 result is {}", result);
+    println!("Day 2 part 1 result is {}", part1());
+    println!("Day 2 part 2 result is {}", part2());
     Ok(())
 }
 
-fn part_1() -> usize {
+fn part1() -> usize {
     input("2.txt")
         .unwrap()
         .lines()
@@ -17,7 +15,7 @@ fn part_1() -> usize {
         .count()
 }
 
-fn part_2() -> usize {
+fn part2() -> usize {
     input("2.txt")
         .unwrap()
         .lines()
@@ -51,12 +49,12 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_part_1() {
-        assert!(part_1() == 660);
+    fn test_part1() {
+        assert!(part1() == 660);
     }
 
     #[test]
-    fn test_part_2() {
-        assert!(part_2() == 530);
+    fn test_part2() {
+        assert!(part2() == 530);
     }
 }
