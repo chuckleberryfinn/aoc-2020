@@ -15,26 +15,19 @@ fn get_codes() -> Vec<String> {
         .collect()
 }
 
-fn bsearch(code: &str, limit: usize) -> usize {
-    let mut m = limit;
-    let mut p = 0;
-    for c in code.chars() {
-        match c {
-            'F' | 'L' => m = (m + p) / 2,
-            'B' | 'R' => p = (m + p) / 2,
-            _ => (),
-        }
+fn bsearch(code: &str, start: usize, end: usize) -> usize {
+    if code.is_empty() {
+        return end;
     }
-    m
-}
 
-fn decode(code: &str) -> (usize, usize) {
-    (bsearch(&code[..7], 127), bsearch(&code[7..], 7))
+    match code.chars().next().unwrap() {
+        'F' | 'L' => bsearch(&code[1..], start, (start + end) / 2),
+        _ => bsearch(&code[1..], (start + end) / 2, end),
+    }
 }
 
 fn calculate_id(code: &str) -> usize {
-    let row_seat = decode(code);
-    row_seat.0 * 8 + row_seat.1
+    bsearch(&code[..7], 0, 127) * 8 + bsearch(&code[7..], 0, 7)
 }
 
 fn part1(codes: &[String]) -> usize {
@@ -66,9 +59,9 @@ mod tests {
 
     #[test]
     fn test_decode() {
-        assert!(decode("FBFBBFFRLR") == (44, 5));
-        assert!(decode("BFFFBBFRRR") == (70, 7));
-        assert!(decode("FFFBBBFRRR") == (14, 7));
-        assert!(decode("BBFFBBFRLL") == (102, 4));
+        assert!(calculate_id("FBFBBFFRLR") == 357);
+        assert!(calculate_id("BFFFBBFRRR") == 567);
+        assert!(calculate_id("FFFBBBFRRR") == 119);
+        assert!(calculate_id("BBFFBBFRLL") == 820);
     }
 }
