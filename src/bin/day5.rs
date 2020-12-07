@@ -35,12 +35,12 @@ fn part1(codes: &[String]) -> usize {
 }
 
 fn part2(codes: &[String]) -> usize {
-    let all_codes: Vec<usize> = codes.iter().map(|c| calculate_id(&c)).collect();
+    let mut all_codes: Vec<usize> = codes.iter().map(|c| calculate_id(&c)).collect();
+    all_codes.sort_unstable();
+    let start = all_codes[0];
+    let end = all_codes.last().unwrap();
 
-    let start = all_codes.iter().min().unwrap();
-    let end = all_codes.iter().max().unwrap();
-
-    (*start..=*end).sum::<usize>() - all_codes.iter().sum::<usize>()
+    (start..=*end).sum::<usize>() - all_codes.iter().sum::<usize>()
 }
 
 #[cfg(test)]
